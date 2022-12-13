@@ -17,6 +17,7 @@ class Donation(models.Model):
     hospital_name=models.CharField(_('hospital_name'),max_length=255,blank=True,null=True)
     location=models.CharField(_('location'),max_length=255,blank=True,null=True)
     donor_id=models.CharField(_('donor_id'),max_length=255,blank=True,null=True)
+    hospital_id=models.CharField(_('hospital_id'),max_length=255,blank=True,null=True)
     blood_type=models.CharField(_('blood_type'),max_length=255,blank=True,null=True)
     # gender=models.CharField(_('gender'),max_length=255,blank=True,null=True)
     # blood_type=models.CharField(_('blood_type'),max_length=255,blank=True,null=True)

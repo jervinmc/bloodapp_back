@@ -46,9 +46,15 @@ INSTALLED_APPS = [
     'drf_yasg',
     'rest_framework',
     'donation',
+    'assestment',
     'corsheaders',
+    'post',
+    'channel',
     'storages',
+    'request',
+    'chat',
     'users',
+    'hospital'
 ]
 CORS_ALLOW_ALL_ORIGINS = True
 CORS_ALLOW_CREDENTIALS = True

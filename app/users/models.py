@@ -19,11 +19,16 @@ class User(models.Model):
     user_type=models.CharField(_('user_type'),max_length=255,blank=True,null=True)
     birthdate=models.CharField(_('birthdate'),max_length=255,blank=True,null=True)
     gender=models.CharField(_('gender'),max_length=255,blank=True,null=True)
+    no_donate = models.IntegerField(_('no_donate'),default=0.0)
     blood_type=models.CharField(_('blood_type'),max_length=255,blank=True,null=True)
     password=models.CharField(_('password'),max_length=255,blank=True,null=True)
     marital_status=models.CharField(_('marital_status'),max_length=255,blank=True,null=True)
     mobile_number=models.CharField(_('mobile_number'),max_length=255,blank=True,null=True)
+    longitude=models.CharField(_('longitude'),max_length=255,blank=True,null=True)
+    latitude=models.CharField(_('latitude'),max_length=255,blank=True,null=True)
     permanent_address=models.CharField(_('permanent_address'),max_length=255,blank=True,null=True)
+    is_active=models.BooleanField(_('is_active'),default=True)
+
     
     # image = models.ImageField(
     #     _('image'), upload_to=nameFile, default="uploads/Cases.png")

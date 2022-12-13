@@ -11,6 +11,7 @@ from django.core.mail import EmailMultiAlternatives
 from django.template.loader import render_to_string, get_template
 import string
 import random
+from django.db.models import F
 import string
 from rest_framework.response import Response
 class UserView(viewsets.ModelViewSet):  
@@ -37,8 +38,9 @@ class Login(generics.GenericAPIView):
     def post(self,request,format=None):
         try:
             res = request.data
-            items = User.objects.filter(email=res.get('email'),password=res.get('password')).count()
+            items = User.objects.filter(email=res.get('email'),password=res.get('password'),is_active=True).count()
             if(items>0):
+               print(res)
                items = User.objects.filter(email=res.get('email'),password=res.get('password')) 
                items = UserSerializer(items,many=True)       
                return Response(status=status.HTTP_200_OK,data=items.data)
@@ -59,6 +61,27 @@ class VerifyUser(generics.GenericAPIView):
         return Response()
 
 
+class MyDetails(generics.GenericAPIView):
+    def post(self,request):
+        res = request.data
+        items = User.objects.filter(id=res.get('id'))
+        items = UserSerializer(items,many=True)
+        return Response(data=items.data[0])
+
+class Hospital(generics.GenericAPIView):
+    def get(self,request):
+        res = request.data
+        items = User.objects.filter(user_type='Institution')
+        items = UserSerializer(items,many=True)
+        print(items.data)
+        return Response(data=items.data)
+
+
+class UserAddDonate(generics.GenericAPIView):
+    def post(self,request):
+        res = request.data
+        items = User.objects.filter(id=res.get('id')).update(no_donate=F('no_donate')+1)
+        return Response(data=[])
 
 class ResetPassword(generics.GenericAPIView):
     def post(self,request):
