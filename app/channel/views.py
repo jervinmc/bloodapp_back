@@ -73,7 +73,19 @@ class ChannelSend(generics.GenericAPIView):
     permission_classes=[permissions.AllowAny]
     def post(self,request):
         print(request.data)
+        res = request.data
         pusher_client.trigger(request.data.get('channel'), 'my-test', {'message': request.data.get('message')})
+        c_item = Chat.objects.filter(channel=request.data.get('channel'))
+        c_item = ChatSerializer(c_item,many=True)
+        for x in c_item.data:
+            print(res.get('chat_user_id'))
+            print(x['chat_user_id'])
+            print(str(res.get('chat_user_id'))!=str(x['chat_user_id']))
+            if(str(res.get('chat_user_id'))!=str(x['chat_user_id'])):
+                print("okayyyy")
+                print(x)
+                pusher_client.trigger(x['chat_user_id'], 'my-test', {'message': request.data.get('message')})
+                break
         try:
             serializer = ChatSerializer(data=request.data)
             serializer.is_valid(raise_exception=True)

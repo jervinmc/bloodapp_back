@@ -28,6 +28,8 @@ class User(models.Model):
     latitude=models.CharField(_('latitude'),max_length=255,blank=True,null=True)
     permanent_address=models.CharField(_('permanent_address'),max_length=255,blank=True,null=True)
     is_active=models.BooleanField(_('is_active'),default=True)
+    is_assessed=models.BooleanField(_('is_assessed'),default=True)
+    is_notification=models.BooleanField(_('is_notification'),default=True)
 
     
     # image = models.ImageField(
